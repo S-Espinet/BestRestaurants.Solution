@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
+@model BestRestaurants.Models.Restaurant
+
+<h4>Add a new Restaurant</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+  @Html.LabelFor(model => model.City)
+  @Html.TextBoxFor(model => model.City)
+  @Html.LabelFor(model => model.Price)
+  @Html.TextBoxFor(model => model.Price)
+
+  @Html.LabelFor(model => model.Cuisine)
+  @Html.DropDownList("CuisineId")
+
+  <input type="submit" value="Add new restaurant" class="btn btn-default" />
+}
+<p>@Html.ActionLink("Show all restaurants", "Index")</p>
