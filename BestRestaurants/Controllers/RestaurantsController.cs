@@ -82,5 +82,25 @@ namespace BestRestaurants.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    [HttpPost]
+    public ActionResult Search(string parameter)
+    {
+      //var cuisineQuery = _db.Cuisines.AsQueryable();
+      var restaurantQuery = _db.Restaurants.AsQueryable();
+      var query = _db.Cuisines.Where(cuisine => cuisine.Type.ToLower() == parameter.ToLower());
+      var list = query.ToList();
+      if (list.Any())
+      {
+        var cuisineId = query.FirstOrDefault().CuisineId;
+        restaurantQuery = restaurantQuery.Where(restaurant => restaurant.JoinEntities.Single(join => join.CuisineId == cuisineId).CuisineId == cuisineId);
+        var search = restaurantQuery.ToList();
+        return View("Index", search);
+      } 
+      else 
+      {
+        return RedirectToAction("Index", "Home");
+      }
+    }
   }
 }
