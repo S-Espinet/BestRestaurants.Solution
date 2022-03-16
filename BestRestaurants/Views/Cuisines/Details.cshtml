@@ -1,4 +1,4 @@
-@* @{
+@{
   Layout = "_Layout";
 }
 
@@ -7,6 +7,22 @@
 <h2>Cuisines Details</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Type): @Html.DisplayFor(model => model.Type)<h3>
+<br />
+@if (@Model.JoinEntities.Count == 0)
+{
+  <p>There are no restaurants that serve this cuisine</p>
+}
+else
+{
+  <h3>Restaurants that offer this cuisine: </h3>
+  <ul>
+  @foreach(var join in Model.JoinEntities)
+  {
+    <li>@join.Restaurant.Name</li>
+  }
+  </ul>
+}
 <p>@Html.ActionLink("Edit Cuisine", "Edit", new { id = Model.CuisineId })</p>
 <p>@Html.ActionLink("Delete Cuisine", "Delete", new { id = Model.CuisineId })</p>
-<p>@Html.ActionLink("Back to list", "Index")</p> *@
+<p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("View Restaurants", "Index", "Restaurants")</p>

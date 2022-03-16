@@ -1,4 +1,4 @@
-@* @{
+@{
   Layout = "_Layout";
 }
 
@@ -15,9 +15,9 @@
   @Html.LabelFor(model => model.Price)
   @Html.TextBoxFor(model => model.Price)
 
-  @Html.LabelFor(model => model.Cuisine)
+  @Html.Label("Select cuisine")
   @Html.DropDownList("CuisineId")
 
   <input type="submit" value="Add new restaurant" class="btn btn-default" />
 }
-<p>@Html.ActionLink("Show all restaurants", "Index")</p> *@
+<p>@Html.ActionLink("Show all restaurants", "Index")</p>
